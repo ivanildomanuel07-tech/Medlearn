@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade — MedLearn</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0f11;--surface:#17171a;--surface2:#1e1e23;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#f0efe8;--muted:#8a8a90;--hint:#55555c;
+  --accent:#7c6ef5;--accent2:#a89cf7;
+  --teal:#34c98f;--r:12px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.7;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:var(--hint);border-radius:4px;}
+
+header{border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg);z-index:10;}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Instrument Serif',serif;font-size:20px;color:var(--text);text-decoration:none;}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;font-style:italic;color:#fff;}
+.btn-back{background:transparent;border:1px solid var(--border2);color:var(--muted);padding:7px 16px;border-radius:var(--rs);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all .15s;}
+.btn-back:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+
+main{max-width:720px;margin:0 auto;padding:48px 24px 80px;}
+
+.page-tag{display:inline-flex;align-items:center;font-size:10px;padding:3px 10px;border-radius:20px;font-weight:500;letter-spacing:.05em;background:rgba(124,110,245,0.15);color:var(--accent2);border:1px solid rgba(124,110,245,0.25);margin-bottom:16px;}
+h1{font-family:'Instrument Serif',serif;font-size:38px;line-height:1.2;margin-bottom:10px;}
+.subtitle{font-size:14px;color:var(--muted);margin-bottom:8px;}
+.updated{font-size:12px;color:var(--hint);margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--border);}
+
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin-bottom:40px;}
+.toc-title{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--hint);margin-bottom:12px;}
+.toc a{display:block;font-size:13px;color:var(--muted);text-decoration:none;padding:4px 0;border-left:2px solid transparent;padding-left:12px;transition:all .15s;}
+.toc a:hover{color:var(--accent2);border-left-color:var(--accent);}
+
+section{margin-bottom:40px;}
+h2{font-family:'Instrument Serif',serif;font-size:22px;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+h2::before{content:'';display:block;width:3px;height:22px;background:var(--accent);border-radius:2px;flex-shrink:0;}
+p{font-size:14px;color:#c8c7c0;margin-bottom:12px;line-height:1.8;}
+ul{padding-left:0;margin-bottom:12px;}
+ul li{font-size:14px;color:#c8c7c0;line-height:1.8;padding:3px 0 3px 20px;position:relative;}
+ul li::before{content:'–';position:absolute;left:4px;color:var(--hint);}
+
+.highlight-box{background:rgba(124,110,245,0.06);border:1px solid rgba(124,110,245,0.2);border-radius:var(--rs);padding:16px 20px;margin:16px 0;}
+.highlight-box p{margin:0;font-size:13px;color:var(--accent2);}
+
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin-top:16px;}
+.contact-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);padding:6px 0;}
+.contact-label{color:var(--hint);width:80px;flex-shrink:0;}
+.contact-val{color:var(--text);}
+
+footer{border-top:1px solid var(--border);padding:24px 32px;text-align:center;font-size:12px;color:var(--hint);}
+footer a{color:var(--accent2);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <div class="logo-mark">M</div>
+    MedLearn
+  </a>
+  <a class="btn-back" href="/">← Voltar ao início</a>
+</header>
+
+<main>
+  <div class="page-tag">Legal</div>
+  <h1>Política de Privacidade</h1>
+  <p class="subtitle">Como recolhemos, usamos e protegemos os teus dados pessoais.</p>
+  <p class="updated">Última actualização: Abril de 2026</p>
+
+  <div class="toc">
+    <div class="toc-title">Índice</div>
+    <a href="#recolha">1. Dados que recolhemos</a>
+    <a href="#uso">2. Como usamos os teus dados</a>
+    <a href="#armazenamento">3. Armazenamento e segurança</a>
+    <a href="#partilha">4. Partilha de dados</a>
+    <a href="#direitos">5. Os teus direitos</a>
+    <a href="#cookies">6. Cookies</a>
+    <a href="#menores">7. Menores de idade</a>
+    <a href="#alteracoes">8. Alterações a esta política</a>
+    <a href="#contacto">9. Contacto</a>
+  </div>
+
+  <section id="recolha">
+    <h2>Dados que recolhemos</h2>
+    <p>Ao criares uma conta no MedLearn, recolhemos os seguintes dados:</p>
+    <ul>
+      <li>Nome completo</li>
+      <li>Endereço de email</li>
+      <li>Curso e ano académico</li>
+      <li>Preferências de estudo (definidas durante o onboarding)</li>
+      <li>Flashcards criados e progresso de estudo</li>
+    </ul>
+    <div class="highlight-box">
+      <p>Nunca recolhemos dados de pagamento, documentos de identificação, ou qualquer informação sensível não listada acima.</p>
+    </div>
+  </section>
+
+  <section id="uso">
+    <h2>Como usamos os teus dados</h2>
+    <p>Os teus dados são usados exclusivamente para:</p>
+    <ul>
+      <li>Criar e gerir a tua conta na plataforma</li>
+      <li>Personalizar o conteúdo de estudo com base no teu curso e ano</li>
+      <li>Guardar o teu progresso e flashcards entre sessões</li>
+      <li>Melhorar a experiência da plataforma</li>
+    </ul>
+    <p>Não usamos os teus dados para publicidade, nem os vendemos ou cedemos a terceiros para fins comerciais.</p>
+  </section>
+
+  <section id="armazenamento">
+    <h2>Armazenamento e segurança</h2>
+    <p>Os teus dados são armazenados de forma segura através do <strong style="color:var(--text)">Supabase</strong>, uma plataforma de base de dados com encriptação em repouso e em trânsito (HTTPS/TLS).</p>
+    <p>As passwords são geridas pelo sistema de autenticação do Supabase, que utiliza encriptação bcrypt — nunca armazenamos passwords em texto simples.</p>
+  </section>
+
+  <section id="partilha">
+    <h2>Partilha de dados</h2>
+    <p>Os teus dados não são partilhados com terceiros, com excepção dos seguintes prestadores de serviço essenciais ao funcionamento da plataforma:</p>
+    <ul>
+      <li><strong style="color:var(--text)">Supabase</strong> — armazenamento de dados e autenticação</li>
+      <li><strong style="color:var(--text)">Vercel</strong> — alojamento do site</li>
+      <li><strong style="color:var(--text)">Anthropic</strong> — processamento de perguntas enviadas à IA (apenas o texto da pergunta, sem dados pessoais)</li>
+    </ul>
+  </section>
+
+  <section id="direitos">
+    <h2>Os teus direitos</h2>
+    <p>Tens o direito de:</p>
+    <ul>
+      <li>Aceder aos teus dados pessoais</li>
+      <li>Corrigir dados incorrectos</li>
+      <li>Solicitar a eliminação da tua conta e todos os dados associados</li>
+      <li>Exportar os teus dados</li>
+    </ul>
+    <p>Para exercer qualquer um destes direitos, entra em contacto connosco através do email abaixo.</p>
+  </section>
+
+  <section id="cookies">
+    <h2>Cookies</h2>
+    <p>O MedLearn utiliza apenas cookies essenciais para manter a tua sessão activa. Não utilizamos cookies de rastreamento ou publicidade.</p>
+  </section>
+
+  <section id="menores">
+    <h2>Menores de idade</h2>
+    <p>O MedLearn destina-se a estudantes universitários de medicina. Não recolhemos intencionalmente dados de menores de 18 anos. Se tomares conhecimento de que um menor criou uma conta, contacta-nos para que possamos eliminar os dados.</p>
+  </section>
+
+  <section id="alteracoes">
+    <h2>Alterações a esta política</h2>
+    <p>Podemos actualizar esta política ocasionalmente. Quando o fizermos, actualizamos a data no topo desta página. Em caso de alterações significativas, notificamos os utilizadores por email.</p>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Para questões relacionadas com privacidade ou para exercer os teus direitos:</p>
+    <div class="contact-card">
+      <div class="contact-row"><span class="contact-label">Plataforma</span><span class="contact-val">MedLearn</span></div>
+      <div class="contact-row"><span class="contact-label">Email</span><span class="contact-val">privacidade@medlearn.vercel.app</span></div>
+      <div class="contact-row"><span class="contact-label">Site</span><span class="contact-val">medlearn.vercel.app</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 MedLearn · <a href="/">Voltar ao início</a>
+</footer>
+
+</body>
+</html>
