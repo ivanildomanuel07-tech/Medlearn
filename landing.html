@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedLearn — Estuda medicina de forma inteligente</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0d;
+  --surface: #111115;
+  --surface2: #18181d;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.1);
+  --text: #eeede6;
+  --muted: #888890;
+  --hint: #44444c;
+  --accent: #7c6ef5;
+  --accent2: #a89cf7;
+  --teal: #34c98f;
+  --amber: #f0a830;
+  --coral: #f07060;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 40px;
+  background:rgba(10,10,13,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:padding .3s;
+}
+nav.scrolled{padding:12px 40px;}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:'Instrument Serif',serif;font-size:20px;color:var(--text);text-decoration:none;}
+.nav-logo-mark{width:32px;height:32px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;font-style:italic;color:#fff;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-link{font-size:13px;color:var(--muted);text-decoration:none;transition:color .15s;}
+.nav-link:hover{color:var(--text);}
+.nav-cta{background:var(--accent);color:#fff;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;transition:opacity .15s;}
+.nav-cta:hover{opacity:.85;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:120px 24px 80px;text-align:center;position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:800px;height:700px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(124,110,245,0.13) 0%,transparent 68%);
+  pointer-events:none;
+  animation:glowPulse 6s ease-in-out infinite;
+}
+.hero-glow2{
+  position:absolute;top:30%;left:20%;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(52,201,143,0.05) 0%,transparent 70%);
+  pointer-events:none;
+  animation:glowPulse 9s ease-in-out infinite reverse;
+}
+@keyframes glowPulse{0%,100%{opacity:.7;transform:translateX(-50%) scale(1);}50%{opacity:1;transform:translateX(-50%) scale(1.08);}}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(124,110,245,0.1);border:1px solid rgba(124,110,245,0.25);
+  border-radius:20px;padding:5px 14px;font-size:12px;color:var(--accent2);
+  margin-bottom:28px;animation:fadeUp .6s ease both;
+}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:badgePulse 2s infinite;}
+@keyframes badgePulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,201,143,.4);}50%{box-shadow:0 0 0 4px rgba(52,201,143,0);}}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(42px,7vw,80px);line-height:1.1;
+  color:var(--text);margin-bottom:20px;
+  animation:fadeUp .6s .1s ease both;
+}
+.hero h1 em{font-style:italic;color:var(--accent2);}
+.hero-sub{
+  font-size:clamp(15px,2vw,18px);color:var(--muted);line-height:1.7;
+  max-width:520px;margin:0 auto 40px;
+  animation:fadeUp .6s .2s ease both;
+}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s .3s ease both;}
+.btn-hero-primary{
+  background:var(--accent);color:#fff;padding:14px 32px;border-radius:10px;
+  font-size:15px;font-weight:500;text-decoration:none;transition:all .2s;
+  box-shadow:0 0 0 0 rgba(124,110,245,0);
+}
+.btn-hero-primary:hover{opacity:.9;box-shadow:0 8px 30px rgba(124,110,245,0.35);transform:translateY(-1px);}
+.btn-hero-ghost{
+  background:transparent;color:var(--text);padding:14px 32px;border-radius:10px;
+  font-size:15px;border:1px solid var(--border2);text-decoration:none;transition:all .15s;
+}
+.btn-hero-ghost:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.04);}
+.hero-note{font-size:12px;color:var(--hint);margin-top:16px;animation:fadeUp .6s .4s ease both;}
+
+/* ── ANIMATED MOCKUP ── */
+.hero-mockup{
+  margin-top:60px;width:100%;max-width:900px;
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:16px;overflow:hidden;
+  animation:fadeUp .7s .5s ease both;
+  box-shadow:0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+}
+.mockup-bar{
+  background:var(--surface2);border-bottom:1px solid var(--border);
+  padding:12px 16px;display:flex;align-items:center;gap:8px;
+}
+.mockup-dot{width:10px;height:10px;border-radius:50%;}
+.mockup-url{margin-left:8px;flex:1;background:rgba(255,255,255,0.04);border-radius:5px;padding:4px 12px;font-size:10px;color:var(--hint);max-width:260px;}
+.mockup-inner{display:flex;height:360px;}
+.mockup-sidebar{width:190px;background:var(--surface);border-right:1px solid var(--border);padding:16px 0;overflow:hidden;}
+.mockup-sidebar-section{font-size:9px;color:var(--hint);text-transform:uppercase;letter-spacing:.08em;padding:12px 16px 4px;}
+.mockup-sidebar-item{padding:7px 16px;font-size:11px;color:var(--hint);display:flex;align-items:center;gap:7px;}
+.mockup-sidebar-item.active{color:var(--accent2);background:rgba(124,110,245,0.08);border-left:2px solid var(--accent);}
+.mockup-sidebar-item.done{color:var(--teal);}
+.ms-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.mockup-content{flex:1;padding:22px 24px;overflow:hidden;display:flex;flex-direction:column;gap:0;}
+
+/* typing animation for mockup */
+.mockup-tag{display:inline-block;background:rgba(124,110,245,0.15);color:var(--accent2);font-size:10px;padding:3px 8px;border-radius:10px;margin-bottom:10px;}
+.mockup-title{font-family:'Instrument Serif',serif;font-size:17px;margin-bottom:6px;}
+.mockup-text{font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+.mockup-cursor{display:inline-block;width:2px;height:11px;background:var(--accent2);margin-left:1px;animation:blink .8s infinite;vertical-align:middle;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.mockup-concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.mc{background:var(--surface2);border-radius:6px;padding:10px;font-size:10px;}
+.mc-title{color:var(--accent2);font-weight:500;margin-bottom:3px;}
+.mc-body{color:var(--hint);line-height:1.4;}
+.mockup-ai-bar{background:rgba(124,110,245,0.06);border:1px solid rgba(124,110,245,0.18);border-radius:7px;padding:10px 12px;display:flex;align-items:center;gap:8px;}
+.mockup-ai-text{flex:1;font-size:10px;color:var(--hint);}
+.mockup-ai-btn{background:var(--accent);color:#fff;font-size:9px;padding:4px 10px;border-radius:4px;white-space:nowrap;}
+.mockup-ai-typing{display:flex;gap:3px;align-items:center;}
+.mda{width:3px;height:3px;border-radius:50%;background:var(--accent2);animation:pulse 1s infinite;}
+.mda:nth-child(2){animation-delay:.2s;}.mda:nth-child(3){animation-delay:.4s;}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* tabs in mockup */
+.mockup-tabs{display:flex;gap:2px;margin-bottom:14px;}
+.mockup-tab{font-size:10px;padding:4px 10px;border-radius:5px;color:var(--hint);}
+.mockup-tab.active{background:rgba(124,110,245,0.15);color:var(--accent2);}
+
+/* ── STATS ── */
+.stats{padding:60px 40px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stat{text-align:center;}
+.stat-num{font-family:'Instrument Serif',serif;font-size:42px;color:var(--text);}
+.stat-lbl{font-size:13px;color:var(--muted);margin-top:4px;}
+
+/* ── FEATURES ── */
+.features{padding:100px 40px;max-width:1100px;margin:0 auto;}
+.section-label{font-size:11px;letter-spacing:.1em;color:var(--accent2);text-transform:uppercase;margin-bottom:12px;}
+.section-title{font-family:'Instrument Serif',serif;font-size:clamp(32px,4vw,48px);line-height:1.2;margin-bottom:16px;}
+.section-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:500px;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;}
+.feature-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:28px;transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.feature-card::before{
+  content:'';position:absolute;inset:0;border-radius:14px;
+  background:radial-gradient(ellipse at top left,rgba(124,110,245,0.06),transparent 60%);
+  opacity:0;transition:opacity .25s;
+}
+.feature-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.3);}
+.feature-card:hover::before{opacity:1;}
+.feature-icon{
+  width:40px;height:40px;border-radius:10px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;
+}
+.feature-title{font-size:15px;font-weight:500;margin-bottom:8px;}
+.feature-body{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── HOW IT WORKS ── */
+.how{padding:100px 40px;max-width:1100px;margin:0 auto;}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative;}
+.steps::before{content:'';position:absolute;top:20px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--border2),var(--border2),transparent);}
+.step{text-align:center;padding:0 16px;}
+.step-num{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--surface2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:500;color:var(--accent2);
+  margin:0 auto 16px;position:relative;z-index:1;
+}
+.step-title{font-size:14px;font-weight:500;margin-bottom:6px;}
+.step-body{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ── TESTIMONIALS ── */
+.testimonials{padding:100px 40px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.testimonials-inner{max-width:1100px;margin:0 auto;}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.testimonial{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color .2s;}
+.testimonial:hover{border-color:var(--border2);}
+.stars{display:flex;gap:3px;margin-bottom:14px;}
+.star{width:12px;height:12px;color:var(--amber);}
+.testimonial-text{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+.testimonial-author{display:flex;align-items:center;gap:10px;}
+.author-avatar{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;color:#fff;flex-shrink:0;
+}
+.author-name{font-size:13px;font-weight:500;}
+.author-role{font-size:11px;color:var(--hint);}
+
+/* ── PRICING TEASER ── */
+.pricing-teaser{padding:100px 40px;max-width:800px;margin:0 auto;text-align:center;}
+.pricing-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px;text-align:left;}
+.pricing-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;transition:transform .2s;}
+.pricing-card.featured{border-color:rgba(124,110,245,0.5);background:rgba(124,110,245,0.06);box-shadow:0 0 40px rgba(124,110,245,0.1);}
+.pricing-card:hover{transform:translateY(-2px);}
+.pricing-plan{font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em;}
+.pricing-price{font-family:'Instrument Serif',serif;font-size:36px;margin-bottom:4px;}
+.pricing-cycle{font-size:12px;color:var(--hint);}
+.pricing-divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
+.pricing-feature{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:10px;}
+.pf-check{width:14px;height:14px;border-radius:50%;background:rgba(52,201,143,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.btn-pricing{display:block;text-align:center;padding:11px;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;margin-top:20px;transition:all .15s;}
+.btn-pricing.primary{background:var(--accent);color:#fff;}
+.btn-pricing.ghost{border:1px solid var(--border2);color:var(--text);}
+.btn-pricing:hover{opacity:.85;}
+
+/* ── CTA ── */
+.cta{padding:120px 40px;text-align:center;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(ellipse,rgba(124,110,245,0.1) 0%,transparent 70%);pointer-events:none;}
+.cta h2{font-family:'Instrument Serif',serif;font-size:clamp(32px,5vw,60px);line-height:1.15;margin-bottom:20px;position:relative;}
+.cta h2 em{font-style:italic;color:var(--accent2);}
+.cta p{font-size:16px;color:var(--muted);margin-bottom:40px;position:relative;}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);padding:40px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:var(--hint);flex-wrap:wrap;gap:16px;
+}
+.footer-logo{display:flex;align-items:center;gap:8px;font-family:'Instrument Serif',serif;font-size:16px;color:var(--muted);}
+.footer-links{display:flex;gap:20px;}
+.footer-link{color:var(--hint);text-decoration:none;transition:color .15s;}
+.footer-link:hover{color:var(--muted);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .features-grid,.steps,.testimonials-grid,.pricing-cards{grid-template-columns:1fr;}
+  .stats{gap:32px;}
+  .mockup-sidebar{display:none;}
+  footer{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="landing.html" class="nav-logo">
+    <div class="nav-logo-mark">M</div>
+    MedLearn
+  </a>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">Funcionalidades</a>
+    <a href="#como-funciona" class="nav-link">Como funciona</a>
+    <a href="precos.html" class="nav-link">Preços</a>
+  </div>
+  <a href="app.html" class="nav-cta">Começar grátis →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-badge"><div class="badge-dot"></div>Feito por estudantes de medicina, para estudantes de medicina</div>
+  <h1>Estuda medicina<br>de forma <em>inteligente</em></h1>
+  <p class="hero-sub">Resumos explicativos, mapas mentais interativos e flashcards com revisão espaçada — tudo gerado pela IA sobre as tuas matérias.</p>
+  <div class="hero-btns">
+    <a href="app.html" class="btn-hero-primary">Criar conta grátis</a>
+    <a href="#como-funciona" class="btn-hero-ghost">Ver como funciona</a>
+  </div>
+  <div class="hero-note">Sem cartão de crédito · Grátis para começar</div>
+
+  <!-- ANIMATED APP MOCKUP -->
+  <div class="hero-mockup">
+    <div class="mockup-bar">
+      <div class="mockup-dot" style="background:#f07060"></div>
+      <div class="mockup-dot" style="background:#f0a830"></div>
+      <div class="mockup-dot" style="background:#34c98f"></div>
+      <div class="mockup-url">medlearn.app/estudo/insuficiencia-cardiaca</div>
+    </div>
+    <div class="mockup-inner">
+      <div class="mockup-sidebar">
+        <div class="mockup-sidebar-section">Cardiologia</div>
+        <div class="mockup-sidebar-item done"><div class="ms-dot"></div>Anatomia do coração</div>
+        <div class="mockup-sidebar-item done"><div class="ms-dot"></div>Ciclo cardíaco</div>
+        <div class="mockup-sidebar-item active"><div class="ms-dot"></div>Insuficiência cardíaca</div>
+        <div class="mockup-sidebar-item"><div class="ms-dot"></div>Arritmias</div>
+        <div class="mockup-sidebar-item"><div class="ms-dot"></div>Infarto agudo</div>
+        <div class="mockup-sidebar-section" style="margin-top:4px">Pneumologia</div>
+        <div class="mockup-sidebar-item"><div class="ms-dot"></div>DPOC</div>
+        <div class="mockup-sidebar-item"><div class="ms-dot"></div>Pneumonia</div>
+      </div>
+      <div class="mockup-content">
+        <div class="mockup-tabs">
+          <div class="mockup-tab active">Resumo</div>
+          <div class="mockup-tab">Mapa mental</div>
+          <div class="mockup-tab">Flashcards</div>
+          <div class="mockup-tab">Progresso</div>
+        </div>
+        <div class="mockup-tag">Resumo explicativo</div>
+        <div class="mockup-title">Insuficiência cardíaca</div>
+        <div class="mockup-text" id="mock-text">A insuficiência cardíaca ocorre quando o coração não consegue bombear sangue suficiente para satisfazer as necessidades metabólicas do organismo. Existem dois tipos principais: IC sistólica (FE reduzida) e IC diastólica (FE preservada).<span class="mockup-cursor" id="mock-cursor"></span></div>
+        <div class="mockup-concepts">
+          <div class="mc"><div class="mc-title">Fisiopatologia</div><div class="mc-body">DC ↓ → SRAA ativado → retenção Na⁺</div></div>
+          <div class="mc"><div class="mc-title">NYHA</div><div class="mc-body">I → sem sintomas · IV → repouso</div></div>
+          <div class="mc"><div class="mc-title">Tratamento</div><div class="mc-body">IECA · Beta-B · Diurético</div></div>
+        </div>
+        <div class="mockup-ai-bar">
+          <div class="mockup-ai-text" id="mock-ai-text">Qual a diferença entre IC direita e esquerda?</div>
+          <div class="mockup-ai-typing" id="mock-ai-typing" style="display:none">
+            <div class="mda"></div><div class="mda"></div><div class="mda"></div>
+          </div>
+          <div class="mockup-ai-btn">Perguntar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal"><div class="stat-num">3×</div><div class="stat-lbl">Mais retenção vs. leitura passiva</div></div>
+  <div class="stat reveal"><div class="stat-num">40%</div><div class="stat-lbl">Menos tempo a estudar</div></div>
+  <div class="stat reveal"><div class="stat-num">500+</div><div class="stat-lbl">Matérias disponíveis</div></div>
+  <div class="stat reveal"><div class="stat-num">98%</div><div class="stat-lbl">Satisfação dos estudantes</div></div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-label reveal">Funcionalidades</div>
+  <div class="section-title reveal">Tudo o que precisas<br>num só lugar</div>
+  <div class="section-sub reveal">Chega de andar a saltar entre livros, PDFs e aplicações. O MedLearn reúne tudo numa experiência coesa.</div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:rgba(124,110,245,0.12);">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="3" stroke="#a89cf7" stroke-width="1.5"/><path d="M6 7h8M6 10h6M6 13h4" stroke="#a89cf7" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="feature-title">Resumos explicativos</div>
+      <div class="feature-body">Conteúdo claro, com linguagem acessível e exemplos clínicos. Com destaques automáticos dos conceitos-chave.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:rgba(52,201,143,0.1);">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="#34c98f" stroke-width="1.5"/><circle cx="3" cy="5" r="2" stroke="#34c98f" stroke-width="1.2"/><circle cx="17" cy="5" r="2" stroke="#34c98f" stroke-width="1.2"/><circle cx="3" cy="15" r="2" stroke="#34c98f" stroke-width="1.2"/><circle cx="17" cy="15" r="2" stroke="#34c98f" stroke-width="1.2"/><path d="M5 5.5L7.5 8M12.5 8L15 5.5M5 14.5L7.5 12M12.5 12L15 14.5" stroke="#34c98f" stroke-width="1" stroke-linecap="round"/></svg>
+      </div>
+      <div class="feature-title">Mapas mentais interativos</div>
+      <div class="feature-body">Visualiza as conexões entre conceitos. Clica em qualquer nó para aprofundar com a IA instantaneamente.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:rgba(240,168,48,0.1);">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="3" stroke="#f0a830" stroke-width="1.5"/><path d="M7 10h6" stroke="#f0a830" stroke-width="1.5" stroke-linecap="round"/><path d="M10 7v6" stroke="#f0a830" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="feature-title">Flashcards com IA</div>
+      <div class="feature-body">Gerados automaticamente sobre cada matéria. Sistema de revisão espaçada que agenda o estudo no momento certo.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:rgba(240,112,96,0.1);">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="#f07060" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="7" stroke="#f07060" stroke-width="1.5"/></svg>
+      </div>
+      <div class="feature-title">Pergunta à IA</div>
+      <div class="feature-body">Dúvidas instantâneas sobre qualquer matéria. A IA responde como um professor, com linguagem adaptada ao teu nível.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:rgba(124,110,245,0.12);">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 15V8l6-4 6 4v7" stroke="#a89cf7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="11" width="4" height="4" rx="1" stroke="#a89cf7" stroke-width="1.2"/></svg>
+      </div>
+      <div class="feature-title">Dashboard de progresso</div>
+      <div class="feature-body">Acompanha a tua taxa de retenção, matérias concluídas e próximas revisões agendadas.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:rgba(52,201,143,0.1);">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#34c98f" stroke-width="1.5"/><path d="M10 7v3.5l2 2" stroke="#34c98f" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="feature-title">Revisão espaçada</div>
+      <div class="feature-body">Algoritmo científico que agenda cada cartão no momento ideal para maximizar a memória a longo prazo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="como-funciona">
+  <div class="section-label reveal">Como funciona</div>
+  <div class="section-title reveal">De zero ao domínio<br>em 4 passos</div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div class="step-title">Escolhe a matéria</div>
+      <div class="step-body">Seleciona o tema que queres estudar — cardiologia, pneumologia, neurologia e muito mais.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <div class="step-title">Lê o resumo</div>
+      <div class="step-body">Conteúdo explicativo com exemplos clínicos e conceitos destacados automaticamente.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <div class="step-title">Explora o mapa mental</div>
+      <div class="step-body">Visualiza as conexões entre os conceitos e aprofunda qualquer nó com um clique.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <div class="step-title">Faz os flashcards</div>
+      <div class="step-body">O sistema agenda automaticamente quando revisitar cada cartão para máxima retenção.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-label reveal">Testemunhos</div>
+    <div class="section-title reveal">O que dizem os estudantes</div>
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+        </div>
+        <div class="testimonial-text">"Finalmente uma plataforma que entende o que é estudar medicina. Os resumos são exactamente o que precisava — claros, com exemplos clínicos e sem o excesso dos livros."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#7c6ef5,#a89cf7)">AM</div>
+          <div><div class="author-name">Ana Martins</div><div class="author-role">Medicina · 4.º Ano · FMUP</div></div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+        </div>
+        <div class="testimonial-text">"Os flashcards com revisão espaçada mudaram a minha forma de estudar para os exames. Saio dos testes muito mais confiante."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#34c98f,#6de0b0)">RC</div>
+          <div><div class="author-name">Rodrigo Costa</div><div class="author-role">Medicina · 3.º Ano · FML</div></div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+          <svg class="star" viewBox="0 0 12 12" fill="#f0a830"><path d="M6 1l1.3 3.9H11L8 7.1l1 3.9L6 9 3 11l1-3.9L1 3.9h3.7z"/></svg>
+        </div>
+        <div class="testimonial-text">"O mapa mental interativo é incrível. Consigo ver como tudo se liga — fisiopatologia, diagnóstico e tratamento numa só imagem."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#f07060,#f09080)">IS</div>
+          <div><div class="author-name">Inês Silva</div><div class="author-role">Medicina · 5.º Ano · FMUC</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING TEASER -->
+<section class="pricing-teaser">
+  <div class="section-label reveal">Preços</div>
+  <div class="section-title reveal">Simples e transparente</div>
+  <div class="pricing-cards">
+    <div class="pricing-card reveal">
+      <div class="pricing-plan">Grátis</div>
+      <div class="pricing-price">0€</div>
+      <div class="pricing-cycle">Para sempre</div>
+      <div class="pricing-divider"></div>
+      <div class="pricing-feature"><div class="pf-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#34c98f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>5 matérias por mês</div>
+      <div class="pricing-feature"><div class="pf-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#34c98f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Resumos e flashcards</div>
+      <div class="pricing-feature"><div class="pf-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#34c98f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Mapa mental básico</div>
+      <a href="app.html" class="btn-pricing ghost">Começar grátis</a>
+    </div>
+    <div class="pricing-card featured reveal">
+      <div class="pricing-plan" style="color:var(--accent2);">Premium</div>
+      <div class="pricing-price">9€</div>
+      <div class="pricing-cycle">por mês</div>
+      <div class="pricing-divider"></div>
+      <div class="pricing-feature"><div class="pf-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#34c98f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Matérias ilimitadas</div>
+      <div class="pricing-feature"><div class="pf-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#34c98f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>IA ilimitada para perguntas</div>
+      <div class="pricing-feature"><div class="pf-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#34c98f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Mapa mental interativo completo</div>
+      <div class="pricing-feature"><div class="pf-check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><polyline points="1,4 3,6 7,2" stroke="#34c98f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Dashboard de progresso avançado</div>
+      <a href="app.html" class="btn-pricing primary">Começar premium</a>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--hint);margin-top:16px;"><a href="precos.html" style="color:var(--accent2);text-decoration:none;">Ver todos os detalhes dos planos →</a></p>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-glow"></div>
+  <h2 class="reveal">Pronto para estudar<br>de forma <em>mais inteligente</em>?</h2>
+  <p class="reveal">Junta-te a centenas de estudantes de medicina que já estão a usar o MedLearn.</p>
+  <a href="app.html" class="btn-hero-primary reveal">Criar conta grátis</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="nav-logo-mark" style="width:24px;height:24px;font-size:12px;">M</div>
+    MedLearn
+  </div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Termos de uso</a>
+    <a href="#" class="footer-link">Privacidade</a>
+    <a href="#" class="footer-link">Contacto</a>
+  </div>
+  <div>© 2025 MedLearn. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+// ── Nav scroll effect ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+// ── Scroll reveal ──
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ── Mockup animations ──
+// Simulate typing / AI thinking loop in mockup
+(function mockupLoop(){
+  const aiText=document.getElementById('mock-ai-text');
+  const aiTyping=document.getElementById('mock-ai-typing');
+  const questions=[
+    'Qual a diferença entre IC direita e esquerda?',
+    'O que é a classificação NYHA?',
+    'Como o SRAA contribui para a IC?',
+    'Quais os critérios diagnósticos de Framingham?'
+  ];
+  let qi=0;
+  function nextQuestion(){
+    setTimeout(()=>{
+      aiText.style.display='none';
+      aiTyping.style.display='flex';
+      setTimeout(()=>{
+        aiTyping.style.display='none';
+        qi=(qi+1)%questions.length;
+        aiText.textContent=questions[qi];
+        aiText.style.display='';
+        nextQuestion();
+      },2200);
+    },4000);
+  }
+  nextQuestion();
+})();
+
+// Parallax glow on scroll
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  const glow=document.querySelector('.hero-glow');
+  if(glow)glow.style.transform=`translateX(-50%) translateY(${y*0.15}px)`;
+});
+</script>
+</body>
+</html>
